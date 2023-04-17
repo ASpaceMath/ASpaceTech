@@ -21,8 +21,7 @@ async function fileUpload(file) {
         method: "POST",
         headers: {
           "content-type": "application/json",
-          app_key:
-            "c1a441f711d68478ff8292e7b98ca7a555891fc6012b175ce2ef11618edeeb87",
+          app_key: "API_KEY!!!",
         },
         body: JSON.stringify({
           src: base64string,
