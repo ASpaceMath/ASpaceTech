@@ -3,11 +3,51 @@ import { useState } from "react";
 import Plotter from "./Plotter";
 //import Module from "./Module";
 
+async function getBase64(file, cb) {
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
+    cb(reader.result);
+  };
+  reader.onerror = function (error) {
+    console.log("Error: ", error);
+  };
+}
+
+async function fileUpload(file) {
+  try {
+    await getBase64(file, (base64string) => {
+      fetch("https://api.mathpix.com/v3/text", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          app_key:
+            "c1a441f711d68478ff8292e7b98ca7a555891fc6012b175ce2ef11618edeeb87",
+        },
+        body: JSON.stringify({
+          src: base64string,
+          formats: ["text", "data", "html"],
+          data_options: {
+            include_asciimath: true,
+            include_latex: true,
+          },
+        }),
+      })
+        .then((res) => res.json())
+        .then((response) => console.log(response));
+    });
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
 const App = () => {
   const [image, setImage] = useState();
-  function handleChange(e) {
+
+  async function handleChange(e) {
     console.group(e.target.files);
     setImage(URL.createObjectURL(e.target.files[0]));
+    fileUpload(e.target.files[0]);
   }
 
   return (
