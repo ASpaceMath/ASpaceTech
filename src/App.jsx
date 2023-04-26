@@ -83,10 +83,10 @@ const App = () => {
         {xSteps.map((step) => {
           return (
             <ul key={step.id}>
-              <li key={step.id}>before change: + {step.oldEquation.ascii()}</li>
-              <li key={step.id}>change: + {step.changeType}</li>
-              <li key={step.id}>after change: + {step.newEquation.ascii()}</li>
-              <li key={step.id}># of substeps: : + {step.substeps.length}</li>
+              <li key={step.id}>before change: {step.oldEquation.ascii()}</li>
+              <li key={step.id}>change: {step.changeType}</li>
+              <li key={step.id}>after change: {step.newEquation.ascii()}</li>
+              <li key={step.id}># of substeps: : {step.substeps.length}</li>
             </ul>
           );
         })}
@@ -96,10 +96,10 @@ const App = () => {
         {ySteps.map((step) => {
           return (
             <ul key={step.id}>
-              <li key={step.id}>before change: + {step.oldEquation.ascii()}</li>
-              <li key={step.id}>change: + {step.changeType}</li>
-              <li key={step.id}>after change: + {step.newEquation.ascii()}</li>
-              <li key={step.id}># of substeps: : + {step.substeps.length}</li>
+              <li key={step.id}>before change: {step.oldEquation.ascii()}</li>
+              <li key={step.id}>change: {step.changeType}</li>
+              <li key={step.id}>after change: {step.newEquation.ascii()}</li>
+              <li key={step.id}># of substeps: {step.substeps.length}</li>
             </ul>
           );
         })}
