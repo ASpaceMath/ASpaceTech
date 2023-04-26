@@ -1,8 +1,8 @@
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { useState } from "react";
 import Plotter from "./Plotter";
 //import Module from "./Module";
- import * as mathsteps from "mathsteps";
+import * as mathsteps from "mathsteps";
 
 async function getBase64(file, cb) {
   let reader = new FileReader();
@@ -27,13 +27,19 @@ const App = () => {
     fileUpload(e.target.files[0]);
   }
 
-  async function handleSolveEquation(){
-
-    let equationSteps = mathsteps.simplifyExpression(equation.replace(/)
-    console.log(equation);
-    setSteps(equationSteps);
-    console.log('solving equation: ' + equationSteps.length );
+  async function handleSolveEquation() {
+    equationSolver(equation);
   }
+
+  const equationSolver = function (equation) {
+    let xSteps = equation.replace(/y/g, "(0)");
+    let steps = mathsteps.solveEquation(xSteps);
+    setXSteps(steps);
+
+    let ySteps = equation.replace(/x/g, "(0)");
+    steps = mathsteps.solveEquation(ySteps);
+    setYSteps(steps);
+  };
 
   async function fileUpload(file) {
     try {
@@ -72,6 +78,32 @@ const App = () => {
       <Plotter></Plotter>
       <h2>Solve Equation: {equation}</h2>
       <button onClick={handleSolveEquation}>Solve</button>
+      <h3>Solve for x</h3>
+      <div className="x-equation-steps">
+        {xSteps.map((step) => {
+          return (
+            <ul key={step.id}>
+              <li key={step.id}>before change: + {step.oldEquation.ascii()}</li>
+              <li key={step.id}>change: + {step.changeType}</li>
+              <li key={step.id}>after change: + {step.newEquation.ascii()}</li>
+              <li key={step.id}># of substeps: : + {step.substeps.length}</li>
+            </ul>
+          );
+        })}
+      </div>
+      <h3>Solve for y</h3>
+      <div className="y-equation-steps">
+        {ySteps.map((step) => {
+          return (
+            <ul key={step.id}>
+              <li key={step.id}>before change: + {step.oldEquation.ascii()}</li>
+              <li key={step.id}>change: + {step.changeType}</li>
+              <li key={step.id}>after change: + {step.newEquation.ascii()}</li>
+              <li key={step.id}># of substeps: : + {step.substeps.length}</li>
+            </ul>
+          );
+        })}
+      </div>
     </div>
   );
 };
