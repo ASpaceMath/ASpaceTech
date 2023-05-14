@@ -31,7 +31,8 @@ const ImageProcessor = () => {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            app_key: "API KEY!",
+            app_key:
+              "c1a441f711d68478ff8292e7b98ca7a555891fc6012b175ce2ef11618edeeb87",
           },
           body: JSON.stringify({
             src: base64string,
@@ -44,7 +45,10 @@ const ImageProcessor = () => {
         })
           .then((res) => res.json())
           // .then((response) => console.log(response));
-          .then((response) => setMathExpression(response.data[0].value));
+          .then((response) => {
+            console.log(response);
+            setMathExpression(response.data[0].value);
+          });
       });
     } catch (e) {
       console.log(e.message);

@@ -1,34 +1,15 @@
 import { useContext } from "react";
 import MathContext from "./MathContext";
 import Plot from "react-plotly.js";
+import * as math from "mathjs";
 
-function makeComputable(mathExp) {
-  //assume for now that all terms in mathExp are separated by a space
-  //assume for now that we have an y = mx + b expression, we're going
-  //to drop the y = part and transform to string 'm*x + b'
-  let mathTokens = mathExp.split("=");
-  mathTokens =
-    mathTokens[mathTokens.findIndex((s) => s.includes("x"))].split(" ");
-
-  let computableExpression = "";
-  for (var i = 0; i < mathTokens.length; ++i) {
-    if (mathTokens[i].includes("x")) {
-      var idx_x = mathTokens[i].indexOf("x");
-      computableExpression += mathTokens[i].substr(0, idx_x) + "*";
-      if (mathTokens[i].includes("^")) {
-        var idx_pow = mathTokens[i].indexOf("^");
-        computableExpression +=
-          "Math.pow(x," + mathTokens[i].substr(idx_pow + 1) + ")" + " ";
-      } else {
-        computableExpression += mathTokens[i].substr(idx_x) + " ";
-      }
-    } else {
-      computableExpression += mathTokens[i] + " ";
-    }
-  }
-
-  return computableExpression.trim();
-}
+//function makeComputable(mathExp) {
+//  //assume for now that we have an y = f(x) expression, we're going
+//  //to drop the y = part and transform to string for later evaluation
+//  let f = math.parse(mathExp.split("=")[1]);
+//  let computableExpression = math.simplify(f).toString();
+//  return computableExpression;
+//}
 
 const Plotter = () => {
   const [mathExpression] = useContext(MathContext);
@@ -39,9 +20,13 @@ const Plotter = () => {
   let xMin = -10;
   let xMax = 10;
   if (mathExpression) {
+    //assume for now that we have an y = f(x) expression, we're going
+    //to drop the y = part and transform to string for later evaluation
+    let f = math.parse(mathExpression.split("=")[1]);
+
     for (let x = xMin; x <= xMax; ++x) {
       xValues.push(x);
-      yValues.push(eval(makeComputable(mathExpression)));
+      yValues.push(f.evaluate({ x }));
     }
   }
 
