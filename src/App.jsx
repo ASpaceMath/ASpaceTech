@@ -12,9 +12,9 @@ const App = () => {
     <div>
       <MathContext.Provider value={mathExpression}>
         <h1>ASpaceMath</h1>
-        <ImageProcessor></ImageProcessor>
-        <Plotter></Plotter>
-        <EquationSolver></EquationSolver>
+        <ImageProcessor />
+        <Plotter />
+        <EquationSolver />
       </MathContext.Provider>
     </div>
   );
