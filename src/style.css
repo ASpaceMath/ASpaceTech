@@ -19,3 +19,7 @@ body {
   border: 4px dashed rgb(117,112,112);
   padding: 20px;
 }
+
+#canvas {
+  touch-action: none;
+}

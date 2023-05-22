@@ -1,6 +1,17 @@
 import { useRef } from "react";
 
-const ImageUpload = ({ setFile }) => {
+async function getBase64(file, cb) {
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
+    cb(reader.result);
+  };
+  reader.onerror = function (error) {
+    console.log("Error: ", error);
+  };
+}
+
+const ImageUpload = ({ setImage }) => {
   const inputRef = useRef();
 
   const handleDragOver = (e) => {
@@ -9,7 +20,12 @@ const ImageUpload = ({ setFile }) => {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    setFile(e.dataTransfer.files[0]);
+    getBase64(e.dataTransfer.files[0], setImage);
+  };
+
+  const onChange = (e) => {
+    e.preventDefault();
+    getBase64(e.target.files[0], setImage);
   };
 
   return (
@@ -20,13 +36,7 @@ const ImageUpload = ({ setFile }) => {
     >
       <h1>Drag and Drop Image to Upload</h1>
       <h1>Or</h1>
-      <input
-        type="file"
-        multiple
-        onChange={(e) => setFile(e.target.files[0])}
-        hidden
-        ref={inputRef}
-      />
+      <input type="file" multiple onChange={onChange} hidden ref={inputRef} />
       <button onClick={() => inputRef.current.click()}>Select Image</button>
     </div>
   );

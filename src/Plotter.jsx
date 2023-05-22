@@ -3,14 +3,6 @@ import MathContext from "./MathContext";
 import Plot from "react-plotly.js";
 import * as math from "mathjs";
 
-//function makeComputable(mathExp) {
-//  //assume for now that we have an y = f(x) expression, we're going
-//  //to drop the y = part and transform to string for later evaluation
-//  let f = math.parse(mathExp.split("=")[1]);
-//  let computableExpression = math.simplify(f).toString();
-//  return computableExpression;
-//}
-
 const Plotter = () => {
   const [mathExpression] = useContext(MathContext);
 
