@@ -1,15 +1,12 @@
-import { useContext, useState } from "react";
-import MathContext from "./MathContext";
+import { useState } from "react";
 import * as mathsteps from "mathsteps";
 
-const EquationSolver = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [mathExpression] = useContext(MathContext);
+const EquationSolver = ({ equation }) => {
   const [xSteps, setXSteps] = useState([]);
   const [ySteps, setYSteps] = useState([]);
 
   async function handleSolveEquation() {
-    equationSolver(mathExpression);
+    equationSolver(equation);
   }
 
   const equationSolver = function (equation) {
@@ -24,9 +21,14 @@ const EquationSolver = () => {
   };
 
   return (
-    <div className="math-steps">
-      <h2>Solve Equation: {mathExpression}</h2>
-      <button onClick={handleSolveEquation}>Solve</button>
+    <div className="font-bold text-black">
+      <h2>Solve Equation: {equation}</h2>
+      <button
+        className="rounded bg-asm_dgreen py-2 px-4 font-bold text-asm_white hover:bg-blue-700"
+        onClick={handleSolveEquation}
+      >
+        Solve
+      </button>
       <h3>Solve for x</h3>
       <div className="x-equation-steps">
         {xSteps.map((step) => {

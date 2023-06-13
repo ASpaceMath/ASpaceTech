@@ -1,12 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import MathContext from "./MathContext";
 import ImageUpload from "./ImageUpload";
-import Canvas from "./Canvas";
+// import Canvas from "./Canvas";
 
 const ImageProcessor = () => {
   const [image, setImage] = useState();
   // eslint-disable-next-line no-unused-vars
-  const [_, setMathExpression] = useContext(MathContext);
+  const [mathExpression, setMathExpression] = useContext(MathContext);
 
   useEffect(() => {
     async function imageToMathPix(img) {
@@ -15,7 +15,8 @@ const ImageProcessor = () => {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            app_key: "API_KEY!",
+            app_key:
+              "c1a441f711d68478ff8292e7b98ca7a555891fc6012b175ce2ef11618edeeb87",
           },
           body: JSON.stringify({
             src: img,
@@ -29,7 +30,7 @@ const ImageProcessor = () => {
           .then((res) => res.json())
           .then((response) => {
             console.log(response);
-            setMathExpression(response.data[0].value);
+            setMathExpression([...mathExpression, response.data[0].value]);
           });
       } catch (e) {
         console.log(e.message);
@@ -44,8 +45,8 @@ const ImageProcessor = () => {
   return (
     <div className="imageProcessor">
       <ImageUpload setImage={setImage} />
-      <Canvas setImage={setImage} />
-      <img alt="" src={image} />
+      {/* <Canvas setImage={setImage} />
+      <img alt="" src={image} /> */}
     </div>
   );
 };
