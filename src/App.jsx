@@ -4,9 +4,13 @@ import ASpaceTechApp from "./ASpaceTechApp";
 
 const App = () => {
   return (
-    <div className="h-screen">
-      <ASpaceTechBanner />
-      <ASpaceTechApp />
+    <div className="flex h-full flex-col">
+      <div className="flex-initial">
+        <ASpaceTechBanner />
+      </div>
+      <div className="flex-auto">
+        <ASpaceTechApp />
+      </div>
     </div>
   );
 };

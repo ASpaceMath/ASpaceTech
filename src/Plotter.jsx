@@ -29,7 +29,7 @@ const Plotter = () => {
   }
 
   return (
-    <div className="ast-plot-container h-full w-full sm:w-3/4">
+    <div className="ast-draw-container ast-plot-container h-full w-full sm:w-3/4 sm:grow">
       <Plot
         data={traces}
         layout={{

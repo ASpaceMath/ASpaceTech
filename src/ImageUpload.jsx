@@ -14,31 +14,18 @@ async function getBase64(file, cb) {
 const ImageUpload = ({ setImage }) => {
   const inputRef = useRef();
 
-  // const handleDragOver = (e) => {
-  //   e.preventDefault();
-  // };
-
-  // const handleDrop = (e) => {
-  //   e.preventDefault();
-  //   getBase64(e.dataTransfer.files[0], setImage);
-  // };
-
   const onChange = (e) => {
     e.preventDefault();
     getBase64(e.target.files[0], setImage);
   };
 
   return (
-    // <div
-    //   className="dragDropZone"
-    //   onDragOver={handleDragOver}
-    //   onDrop={handleDrop}
-    // >
-    <div className="rounded py-1 px-4 text-center font-bold text-asm_dgreen hover:bg-asm_dgreen hover:text-asm_white">
-      {/* <h1>Drag and Drop Image to Upload</h1>
-      <h1>Or</h1> */}
-      <input type="file" multiple onChange={onChange} hidden ref={inputRef} />
-      <button onClick={() => inputRef.current.click()}>Select Image</button>
+    <div className="ast-ul-icon m-auto text-center">
+      <input type="file" onChange={onChange} hidden ref={inputRef} />
+      <button onClick={() => inputRef.current.click()}>
+        <span className="fa-regular fa-image" aria-hidden="true"></span>
+        <span className="sr-only">Image Upload</span>
+      </button>
     </div>
   );
 };
