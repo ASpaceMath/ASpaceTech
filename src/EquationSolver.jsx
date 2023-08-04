@@ -22,7 +22,6 @@ const EquationSolver = ({ equation }) => {
 
   return (
     <div className="w-full text-black">
-      <h2>Equation: {equation}</h2>
       <button
         className="float-right rounded py-1 px-2 text-asm_white hover:bg-blue-700"
         onClick={handleSolveEquation}

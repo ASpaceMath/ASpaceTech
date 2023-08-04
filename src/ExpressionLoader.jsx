@@ -3,11 +3,31 @@ import MathContext from "./MathContext";
 import ImageUpload from "./ImageUpload";
 import ImageDraw from "./ImageDraw";
 import ImageCapture from "./ImageCapture";
+import * as math from "mathjs";
 
 const ExpressionLoader = () => {
   const [image, setImage] = useState();
   // eslint-disable-next-line no-unused-vars
   const [mathExpression, setMathExpression] = useContext(MathContext);
+
+  const storeExpression = (expr) => {
+    const scope = { b: 3 };
+    const nodeExpr = math.parse(expr).transform(function (node) {
+      if (node.isConstantNode) {
+        return new math.SymbolNode("b");
+      } else {
+        return node;
+      }
+    });
+
+    const expressionDetails = {
+      asciimathExpr: expr,
+      currentScope: scope,
+      nodeExpr: nodeExpr,
+    };
+
+    setMathExpression([...mathExpression, expressionDetails]);
+  };
 
   useEffect(() => {
     async function imageToMathPix(img) {
@@ -30,7 +50,7 @@ const ExpressionLoader = () => {
           .then((res) => res.json())
           .then((response) => {
             console.log(response);
-            setMathExpression([...mathExpression, response.data[0].value]);
+            storeExpression(response.data[0].value.split("=")[1]);
           });
       } catch (e) {
         console.log(e.message);
