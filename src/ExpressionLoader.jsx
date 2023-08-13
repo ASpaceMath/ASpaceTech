@@ -11,10 +11,13 @@ const ExpressionLoader = () => {
   const [mathExpression, setMathExpression] = useContext(MathContext);
 
   const storeExpression = (expr) => {
-    const scope = { b: 3 };
+    const availableVariables = "abcdefghijklmnopqrstuvwxyz".split("");
+    const scope = {};
     const nodeExpr = math.parse(expr).transform(function (node) {
       if (node.isConstantNode) {
-        return new math.SymbolNode("b");
+        const variable = availableVariables.shift();
+        scope[variable] = node.value;
+        return new math.SymbolNode(variable);
       } else {
         return node;
       }
