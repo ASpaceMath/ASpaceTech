@@ -8,14 +8,16 @@ const ImageProcessor = () => {
   // eslint-disable-next-line no-unused-vars
   const [mathExpression, setMathExpression] = useContext(MathContext);
 
+
   useEffect(() => {
     async function imageToMathPix(img) {
       try {
+
         await fetch("https://api.mathpix.com/v3/text", {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            app_key: process.env.REACT_APP_API_KEY,
+            app_key: "API KEY",
           },
           body: JSON.stringify({
             src: img,
