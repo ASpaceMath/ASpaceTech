@@ -39,7 +39,7 @@ jobs:
 
       - name: Deploy to App Runner
         id: deploy-apprunner
-        uses: awslabs/amazon-app-runner-deploy@main
+        uses: awslabs/amazon-app-runner-deploy@master
         with:
           service: app-runner-image-deploy-service
           image: ${{ steps.build-image.outputs.image }}
