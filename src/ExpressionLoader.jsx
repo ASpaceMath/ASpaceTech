@@ -39,7 +39,7 @@ const ExpressionLoader = () => {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            app_key: "API_KEY!",
+            app_key: "API KEY!"
           },
           body: JSON.stringify({
             src: img,
