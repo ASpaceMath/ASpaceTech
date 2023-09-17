@@ -15,7 +15,7 @@ const ImageProcessor = () => {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            app_key: process.env.REACT_APP_API_KEY ,
+            app_key: process.env.REACT_APP_API_KEY,
           },
           body: JSON.stringify({
             src: img,
