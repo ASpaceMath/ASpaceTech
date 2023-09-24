@@ -2,7 +2,7 @@ const express = require("express"),
   PORT = 80,
   app = express();
 
-app.get("/", (req, res) => {
+app.get("/api/health", (req, res) => {
   res.status(200).json({ ok: Date.now().toString() });
 });
 
