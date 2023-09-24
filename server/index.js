@@ -1,8 +1,8 @@
 const express = require("express"),
-  PORT = 5000,
+  PORT = 80,
   app = express();
 
-app.get("/api/v1", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({ ok: Date.now().toString() });
 });
 

@@ -26,8 +26,8 @@ jobs:
           branch: ${{ github.ref }}
           runtime: NODEJS_12
           build-command: npm install
-          start-command: npm run dev
-          port: 5173
+          start-command: npm run start
+          port: 80
           region: ${{ secrets.AWS_REGION }}
           cpu : 1
           memory : 2
