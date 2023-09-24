@@ -49,7 +49,7 @@ jobs:
           cpu : 1
           memory : 2
           port: 5173
-          wait-for-service-stability: true
+          wait-for-service-stability: false
           branch: master
 
       - name: App Runner output

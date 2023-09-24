@@ -27,7 +27,7 @@ jobs:
           runtime: NODEJS_12
           build-command: npm install
           start-command: npm run start
-          port: 80
+          port: 5173
           region: ${{ secrets.AWS_REGION }}
           cpu : 1
           memory : 2
