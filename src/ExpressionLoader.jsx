@@ -32,14 +32,31 @@ const ExpressionLoader = () => {
     setMathExpression([...mathExpression, expressionDetails]);
   };
 
+
+
   useEffect(() => {
+    async function getMathPixToken(){
+      try {
+        let response = await fetch("http://aspacetech.us-east-2.elasticbeanstalk.com/token",{
+          method: "POST"
+        }).then(res => res.json());
+
+        return response.token;
+      }
+      catch (e){
+        console.log("Failed to get temporary token");
+      }
+    };
+
     async function imageToMathPix(img) {
       try {
+        let tempToken = await getMathPixToken();
+
         await fetch("https://api.mathpix.com/v3/text", {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            app_key: "API_KEY!",
+            app_token: tempToken,
           },
           body: JSON.stringify({
             src: img,
