@@ -39,8 +39,7 @@ const ExpressionLoader = () => {
       try {
         let response = await fetch("http://aspacetech.us-east-2.elasticbeanstalk.com/token",{
           "content-type": "application/json",
-          method: "POST",
-          mode: "cors"
+          method: "POST"
         }).then(res => res.json());
 
         return response.token;
