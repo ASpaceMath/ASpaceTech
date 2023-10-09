@@ -5,4 +5,7 @@ export default defineConfig({
   plugins: [react()],
   root: "src",
   base: "/ASpaceTech/",
+  server: {
+    cors: false,
+  },
 });
