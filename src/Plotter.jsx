@@ -17,7 +17,7 @@ const Plotter = () => {
       let xMin = -10;
       let xMax = 10;
       let fx = expr.nodeExpr;
-      for (let x = xMin; x <= xMax; x += 0.5) {
+      for (let x = xMin; x <= xMax; x += 0.02) {
         xValues.push(x);
         yValues.push(fx.evaluate({ x: x, ...expr.currentScope }));
       }
@@ -34,6 +34,18 @@ const Plotter = () => {
           showlegend: false,
           autosize: true,
           margin: { l: 35, r: 20, b: 20, t: 20, pad: 5 },
+          xaxis: {
+            range: [-10, 10],
+            ticks: "inside",
+            linewith: 5,
+            minor: { showgrid: true, linewidth: 1 },
+          },
+          yaxis: {
+            range: [-10, 10],
+            ticks: "inside",
+            linewith: 5,
+            minor: { showgrid: true, linewidth: 1 },
+          },
         }}
         useResizeHandler={true}
         style={{ width: "100%", height: "100%" }}
