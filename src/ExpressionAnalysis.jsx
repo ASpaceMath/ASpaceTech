@@ -1,6 +1,6 @@
 const ExpressionAnalysis = () => {
   return (
-    <div className="ast-ctrls-expr-analyze-container flex w-1/2 justify-evenly">
+    <div className="ast-ctrls-expr-analyze-container flex w-full justify-evenly">
       <div className="ast-ea-icon m-auto text-center">
         <span className="fa-solid fa-calculator" aria-hidden="true"></span>
         <span className="sr-only">Calculator</span>

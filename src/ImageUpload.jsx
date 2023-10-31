@@ -23,7 +23,10 @@ const ImageUpload = ({ setImage }) => {
     <div className="ast-ul-icon m-auto text-center">
       <input type="file" onChange={onChange} hidden ref={inputRef} />
       <button onClick={() => inputRef.current.click()}>
-        <span className="fa-regular fa-image" aria-hidden="true"></span>
+        <span
+          className="fa-regular fa-image text-asm_white"
+          aria-hidden="true"
+        ></span>
         <span className="sr-only">Image Upload</span>
       </button>
     </div>

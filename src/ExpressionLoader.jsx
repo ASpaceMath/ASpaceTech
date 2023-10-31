@@ -32,22 +32,22 @@ const ExpressionLoader = () => {
     setMathExpression([...mathExpression, expressionDetails]);
   };
 
-
-
   useEffect(() => {
-    async function getMathPixToken(){
+    async function getMathPixToken() {
       try {
-        let response = await fetch("http://aspacetech.us-east-2.elasticbeanstalk.com/token",{
-          "content-type": "application/json",
-          method: "POST"
-        }).then(res => res.json());
+        let response = await fetch(
+          "http://aspacetech.us-east-2.elasticbeanstalk.com/token",
+          {
+            "content-type": "application/json",
+            method: "POST",
+          }
+        ).then((res) => res.json());
 
         return response.token;
-      }
-      catch (e){
+      } catch (e) {
         console.log("Failed to get temporary token");
       }
-    };
+    }
 
     async function imageToMathPix(img) {
       try {
@@ -84,10 +84,28 @@ const ExpressionLoader = () => {
   }, [image]);
 
   return (
-    <div className="ast-ctrls-expr-upload-container flex w-1/2 justify-evenly">
-      <ImageUpload setImage={setImage} />
-      <ImageDraw />
-      <ImageCapture />
+    <div className="ast-ctrls-expr-upload-container mt-1 flex h-9 w-full justify-center bg-white">
+      <div className="flex w-full bg-asm_mgreen">
+        <div className="m-auto text-center">
+          <button>
+            <span
+              className="fa-solid fa-plus text-asm_white"
+              aria-hidden="true"
+            ></span>
+            <span className="sr-only">Image Upload</span>
+          </button>
+        </div>
+        <ImageUpload setImage={setImage} />
+        <ImageDraw />
+        <ImageCapture />
+      </div>
+      <input
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            storeExpression(e.target.value);
+          }
+        }}
+      />
     </div>
   );
 };
